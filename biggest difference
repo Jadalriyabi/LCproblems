@@ -15,3 +15,26 @@ def biggest_diff(nums):
         return max_val - min_val
     else:
         return 0  # Return 0 if the list is empty or not provided
+
+def biggest_diff(nums):
+    #checking if array is empty or not
+    if not nums: return 0
+
+    # Initialize both largest and smallest to the first element of the list
+    minimum = nums[0]
+    maximum = nums[0]
+
+    #finding or max and min
+    for num in nums:
+        #if current num is greater then max then update max
+        if num > maximum:
+            maximum = num
+        # if current num is less then min then update min
+        if num < minimum:
+            minimum = num
+
+    #calculate the difference between the max and min to find the biggest difference
+    biggest_difference = maximum - minimum
+
+    #return biggest difference
+    return biggest_difference
