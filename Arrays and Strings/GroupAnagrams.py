@@ -1,31 +1,49 @@
+# Are the input strings guaranteed to be non-empty?
+
+# Confirm whether the function should handle empty strings and how they should be treated.
+# Can the input list contain duplicate strings?
+
+# Clarify if the function should handle duplicate strings in the input list and if duplicates should be reflected in the output.
+# What is the expected output format if there are no anagrams?
+
+# Ensure that the interviewer is aware of what should be returned if no anagrams are present
+
 class Solution(object):
-    def rotate(self, matrix):
+    def groupAnagrams(self, strs):
         """
-        :type matrix: List[List[int]]
-        :rtype: None Do not return anything, modify matrix in-place instead.
+        Groups a list of strings into lists of anagrams.
+        
+        :type strs: List[str]
+        :rtype: List[List[str]]
         """
-        left = 0
-        right = len(matrix) - 1
 
-        while left < right:
-            #we want to shift one square at at time
-            for i in range(right - left):
-                top, bottom = left, right
+        # Step 1: Create a dictionary to hold groups of anagrams.
+        # The keys will be sorted strings, and the values will be lists of original strings that are anagrams.
+        grouped = {}
 
-                #save the topleft value, our temp value. The 'i' shift will m,ove the index one position to the right
-                topLeft = matrix[top][left + i]
-
-                #move bottom left into top left.
-                matrix[top][left + i] = matrix[bottom - i][left] # move up the matrix by pne
-
-                #move bottom right into bottom left
-                matrix[bottom - i][left] = matrix[bottom][right - i] #move left in the matix
-
-                #move top right into bottom right
-                matrix[bottom][right - i] = matrix[top + i][right] # move down in the matrix
-
-                #move top left into top right
-                matrix[top + i][right] = topLeft
+        # Step 2: Iterate through each string in the input list.
+        for word in strs:
+            # Step 3: Sort the characters of the string.
+            # Sorting transforms the string into a canonical form that is the same for all anagrams.
+            sorted_word = ''.join(sorted(word))
             
-            right -= 1
-            left += 1
+            # Step 4: Check if the sorted string is already a key in the dictionary.
+            if sorted_word in grouped:
+                # If it is, append the original word to the existing list.
+                grouped[sorted_word].append(word)
+            else:
+                # If it is not, create a new entry in the dictionary with the sorted string as the key and
+                # initialize the list with the original word.
+                grouped[sorted_word] = [word]
+        
+        # Step 5: Return the values of the dictionary as a list of lists.
+        # Each list corresponds to a group of anagrams.
+        return list(grouped.values())
+
+    
+#     Time Complexity:
+
+# Sorting each string takes O(k log k) time, where k is the length of the string. Since there are n strings, the overall time complexity is O(n * k log k).
+# Space Complexity:
+
+# The space complexity is O(n * k) for storing the strings in the dictionary and the resulting output list.
