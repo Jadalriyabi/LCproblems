@@ -16,6 +16,9 @@ def biggest_diff(nums):
     else:
         return 0  # Return 0 if the list is empty or not provided
 
+#AnOTHER soltuion
+#sort the array ande reutn the differnece between the first and the last element 
+
 def biggest_diff(nums):
     #checking if array is empty or not
     if not nums: return 0
