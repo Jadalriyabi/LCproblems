@@ -24,7 +24,6 @@ def cat_dog(s):
     count_dog = 0
     count_cat = 0
 
-
     for i in range(len(s) - 2): # len(s) - 2 because we are checking 3 characters at a time
         if s[i:i+3] == "cat":
             count_cat += 1
